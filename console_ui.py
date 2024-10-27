@@ -1,4 +1,4 @@
-
+import parser
 
 def console() -> int:
     print("Choose option to execute:")
@@ -18,7 +18,7 @@ def console() -> int:
     return chosen_option
 
 def start_parsing():
-    pass
+    parser.main()
 
 def analyze_particular_chat():
     pass
