@@ -1,50 +1,54 @@
 import parser
+import configure_env
 
 def console() -> int:
     """Displays menu options and prompts the user to select an option."""
     while True:
-        print("Choose option to execute:")
+        print("\nChoose an option to execute:")
         print("1. Start parsing")
         print("2. Analyze particular chat")
         print("3. Print overall statistics")
-        print("0. Exit")
-        
+        print("4. See or rewrite .env file")
+        print("0. Exit\n")
+
         try:
-            chosen_option = int(input("Enter number of option: "))
+            chosen_option = int(input("Enter the number of your choice: "))
         except ValueError:
-            print("Invalid input. Please enter a number between 0 and 3.")
+            print("\nInvalid input. Please enter a number between 0 and 4.\n")
             continue
 
-        if chosen_option in {0, 1, 2, 3}:
+        if chosen_option in {0, 1, 2, 3, 4}:
             return chosen_option
         else:
-            print("Invalid input. Please enter a number between 0 and 3.")
+            print("\nInvalid input. Please enter a number between 0 and 4.\n")
 
-def start_parsing():
-    """Starts the parsing process using parser.main()."""
-    filename = input("Enter the filename to save chats (e.g., chats.csv): ")
-    if not filename.lower().endswith('.csv'):
-        filename += '.csv'
-    parser.export_chats(filename)
 
 def analyze_particular_chat():
     """Analyzes a specific chat. Function implementation needed."""
-    print("Function analyze_particular_chat is not yet implemented.")
+    print("\nAnalyzing specific chat feature is not yet implemented.\n")
 
 def print_overall_statistics():
     """Prints overall statistics. Function implementation needed."""
-    print("Function print_overall_statistics is not yet implemented.")
+    print("\nPrinting overall statistics feature is not yet implemented.\n")
 
 def main():
     while True:
-        chosen_option = console()
-        
-        if chosen_option == 0:
-            print("Exiting program.")
-            break
-        elif chosen_option == 1:
-            start_parsing()
-        elif chosen_option == 2:
-            analyze_particular_chat()
-        elif chosen_option == 3:
-            print_overall_statistics()
+        if configure_env.check_if_env_exists():
+            chosen_option = console()
+            if chosen_option == 0:
+                print("\nExiting program.\n")
+                break
+            elif chosen_option == 1:
+                parser.main()
+            elif chosen_option == 2:
+                analyze_particular_chat()
+            elif chosen_option == 3:
+                print_overall_statistics()
+            elif chosen_option == 4:
+                configure_env.configure_env()
+                print("\n.env file configured.\n")
+        else:
+            print("\nYou have to configure your .env file first!\n")
+            configure_env.configure_env()
+
+
