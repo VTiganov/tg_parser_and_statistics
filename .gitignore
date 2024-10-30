@@ -1,8 +1,9 @@
+*.pyc
+*.csv
+*.env
+*.session
+*.session-journal
+
 /venv
 /__pycache__
-*.pyc
 
-/session_name.session
-/.env
-/dataframe.csv
-/session_name.session-journal
